@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h1>新規登録</h1>
+  <h1>アカウント情報更新</h1>
 </div>
 
 <div class="row">
@@ -28,7 +28,11 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
 
-      <%= f.submit '登録', class: 'btn btn-primary btn-block' %>
+      <%= f.submit 'アカウント情報を更新する', class: 'btn btn-primary btn-block' %>
+      <br>
+      <br>
+      <br>
+      <%= link_to 'このアカウントを削除する', @user, method: :delete,  class: 'btn btn-danger btn-block', data: { confirm: '本当に削除してよろしいですか？' } %>
     <% end %>
   </div>
 </div>

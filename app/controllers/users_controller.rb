@@ -23,7 +23,31 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-  end  
+  end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:success] = 'アカウント情報が更新されました'
+      redirect_to @user
+    else
+      flash.now[:danger] = 'アカウント情報 は更新されませんでした'
+      render :edit
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    flash[:success] = 'アカウントは削除されました'
+    redirect_to root_url
+  end
 
   def correct_user
     @project = Project.find(params[:id])
