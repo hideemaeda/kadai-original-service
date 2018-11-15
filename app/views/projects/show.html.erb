@@ -1,0 +1,27 @@
+<h1><%= @project.title %>プロジェクト詳細</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>プロジェクト名</th>
+    <td><%= @project.title %></td>
+  </tr>
+  <tr>
+    <th>概要</th>
+    <td><%= @project.comment %></td>
+  </tr>
+  <tr>
+    <th>スケジュール</th>
+    <td><%= @project.start_day %></td>
+    <td><%= @project.end_day %></td>
+  </tr>
+</table>
+
+<%= link_to 'このプロジェクトを編集する', edit_project_path(@project), class: 'btn btn-warning' %>
+
+<%= form_for(@pjmember) do |f| %>
+  <%= f.hidden_field :project_id %>
+  <%= f.collection_select :user_id, @users, :id, :name %>
+  <%= f.submit %>
+<% end %>
+
+<%= @pjmember_users.inspect %>

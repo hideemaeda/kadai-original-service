@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181112112041) do
+ActiveRecord::Schema.define(version: 20181115135430) do
+
+  create_table "assign_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_assign_members_on_task_id", using: :btree
+    t.index ["user_id"], name: "index_assign_members_on_user_id", using: :btree
+  end
+
+  create_table "pjmembers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_pjmembers_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_pjmembers_on_user_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "comment",    limit: 65535
+    t.date     "start_day"
+    t.date     "end_day"
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
+  end
+
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.string   "priority"
+    t.date     "schedule"
+    t.integer  "progress",   limit: 1
+    t.string   "alarm"
+    t.text     "comment",    limit: 65535
+    t.integer  "project_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -20,4 +62,10 @@ ActiveRecord::Schema.define(version: 20181112112041) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "assign_members", "tasks"
+  add_foreign_key "assign_members", "users"
+  add_foreign_key "pjmembers", "projects"
+  add_foreign_key "pjmembers", "users"
+  add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "projects"
 end

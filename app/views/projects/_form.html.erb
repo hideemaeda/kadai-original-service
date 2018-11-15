@@ -1,0 +1,21 @@
+<div class="container">
+  <%= form_for(@project) do |f| %>
+    <div class="form-group">
+      <label>プロジェクト名：</label>
+      <%= f.text_area :title, class: 'form-control', rows: 1 %>
+    </div>
+    <div class="form-group">
+      <label>概要　：</label>
+      <%= f.text_area :comment, class: 'form-control', rows: 5 %>
+    </div>
+     <div class="form-group">
+      <label>スケジュール：</label>
+      <%= f.text_area :start_day, class: 'form-control', rows: 1 %>
+      <%= f.text_area :end_day, class: 'form-control', rows: 1 %>
+    </div>
+    <div class="form-group">
+      <labelメンバー：</label>
+    </div>
+    <%= f.submit 'プロジェクトを登録する', class: 'btn btn-primary' %>
+  <% end %>
+</div>

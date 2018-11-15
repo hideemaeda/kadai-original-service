@@ -1,0 +1,8 @@
+<h1><%= @project.title %> プロジェクト編集ページ</h1>
+
+<%= render 'form', project: @project %>
+<br>
+<br>
+<div class="container">
+  <%= link_to 'プロジェクトを削除する', @project, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+</div>
