@@ -15,9 +15,9 @@ class Project < ApplicationRecord
     self.pjmembers.find_or_create_by(user_id: user.id)
   end
   
-  def unpjmember(user)
-    like = self.pjmembers.find_by(user_id: user.id)
-    like.destroy if pjmember
+  def pjout(user)
+    pjmember = self.pjmembers.find_by(user_id: user.id)
+    pjmember.destroy if pjmember
   end
   
   def pjmember?(user)
