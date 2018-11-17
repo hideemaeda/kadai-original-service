@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
   end
   
   def edit
+    @all_users = User.all.page(params[:page])
     @users = User.where.not(id: Pjmember.where(project_id: @project.id).pluck(:user_id))
     @pjmember = current_user.pjmembers.build(project_id: @project.id)
     @pjmember_users = User.where(id: Pjmember.where(project_id: @project.id).pluck(:user_id))

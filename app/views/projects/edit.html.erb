@@ -3,6 +3,19 @@
 <%= render 'form', project: @project %>
 <br>
 <br>
+<p>メンバーを追加する</p>
+<%= form_for(@pjmember) do |f| %>
+  <%= f.hidden_field :project_id %>
+  <%= f.collection_select :user_id, @users, :id, :name %>
+  <%= f.submit %>
+<% end %>
+
+<% @pjmember_users.each do |pjmember_user| %>
+　<%= pjmember_user.name %>
+<% end %>
+<br>
+<br>
+<br>
 <div class="container">
   <%= link_to 'プロジェクトを削除する', @project, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
 </div>

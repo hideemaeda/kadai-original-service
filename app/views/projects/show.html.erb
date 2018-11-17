@@ -10,18 +10,20 @@
     <td><%= @project.comment %></td>
   </tr>
   <tr>
-    <th>スケジュール</th>
+    <th>開始日</th>
     <td><%= @project.start_day %></td>
+  </tr>
+  <tr>
+    <th>終了日</th>
     <td><%= @project.end_day %></td>
   </tr>
+  <tr>
+    <th>メンバー</th>
+    <td>
+      <% @pjmember_users.each do |pjmember_user| %>
+        <%= pjmember_user.name %>
+      <% end %>
+    </td>
 </table>
 
 <%= link_to 'このプロジェクトを編集する', edit_project_path(@project), class: 'btn btn-warning' %>
-
-<%= form_for(@pjmember) do |f| %>
-  <%= f.hidden_field :project_id %>
-  <%= f.collection_select :user_id, @users, :id, :name %>
-  <%= f.submit %>
-<% end %>
-
-<%= @pjmember_users.inspect %>

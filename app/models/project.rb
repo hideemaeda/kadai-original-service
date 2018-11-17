@@ -6,10 +6,10 @@ class Project < ApplicationRecord
   
   belongs_to :user
   
-  has_many :pjmembers
+  has_many :pjmembers, dependent: :destroy
   has_many :assign_users, through: :pjmembers, source: :user
   
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   
   def pjmember(user)
     self.pjmembers.find_or_create_by(user_id: user.id)

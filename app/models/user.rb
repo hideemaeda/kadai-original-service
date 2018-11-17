@@ -6,12 +6,14 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
-  has_many :projects
+  has_many :projects, dependent: :destroy
   
-  has_many :pjmembers
+  has_many :pjmembers, dependent: :destroy
   has_many :assign_projects, through: :pjmembers, source: :project
   
-  has_many :assign_members
+  has_many :tasks, dependent: :destroy
+  
+  has_many :assign_members, dependent: :destroy
   has_many :task_menbers, through: :assign_members, source: :task
   
   def pjmember(project)
@@ -24,7 +26,7 @@ class User < ApplicationRecord
   end
   
   def pjmember?(project)
-    self.pjmember_projects.include?(project)
+    self.pjmember_ids.include?(project)
   end
   
   def assign_member(task)

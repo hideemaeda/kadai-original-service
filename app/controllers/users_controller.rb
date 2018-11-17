@@ -54,6 +54,11 @@ class UsersController < ApplicationController
     redirect_to root_path if @project.assign_users.include?(current_user)
   end
 
+  def correct_task
+    @task = Task.find(params[:id])
+    redirect_to root_path if @task.task_menbers.include?(current_user)
+  end
+
   private
 
   def user_params
