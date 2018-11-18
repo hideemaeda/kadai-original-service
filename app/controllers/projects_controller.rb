@@ -11,6 +11,8 @@ class ProjectsController < ApplicationController
     @users = User.where.not(id: Pjmember.where(project_id: @project.id).pluck(:user_id))
     @pjmember = current_user.pjmembers.build(project_id: @project.id)
     @pjmember_users = User.where(id: Pjmember.where(project_id: @project.id).pluck(:user_id))
+    @tasks = Task.all.page(params[:page])
+    @task = @project.tasks.find_by(project: @task)
   end
 
   def new
@@ -23,7 +25,7 @@ class ProjectsController < ApplicationController
       flash[:success] = 'プロジェクトを作成しました。'
       redirect_to root_url
     else
-      @projects = current_user.projects.order('created_at DESC').page(params[:page])
+      @projects = current_user.assign_projects.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'プロジェクトの作成に失敗しました。'
       render 'toppages/index'
     end

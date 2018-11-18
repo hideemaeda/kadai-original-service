@@ -1,0 +1,27 @@
+<ul class="media-list">
+　  <table class="table table-bordered">
+      <tr>
+        <th>タスク名</th>
+        <th>優先度</th>
+        <th>締切日</th>
+        <th>進捗度</th>
+        <th>アラーム</th>
+      </tr>
+  <% @tasks.each do |task| %>
+      <tr>
+        <td><%= link_to task.title, project_task_path(@project) %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.schedule %></td>
+        <td>
+          <div class="progress">
+　　　　　　<div class="progress-bar progress-bar-striped active" role="progressbar" style="width: <%= task.progress %>%;">
+　　　　　　<%= task.progress %>％
+　　　　　　</div>
+　　　　　</div>
+	　　　</td>
+        <td><%= task.alarm %></td>
+      </tr>
+  <% end %>
+  <%= paginate @tasks %>
+</ul>
+

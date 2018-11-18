@@ -1,4 +1,7 @@
 <h1><%= @project.title %>プロジェクト詳細</h1>
+<div>
+  <%= link_to 'このプロジェクトを編集する', edit_project_path(@project), class: 'btn btn-warning pull-right' %>
+</div>
 
 <table class="table table-bordered">
   <tr>
@@ -25,5 +28,10 @@
       <% end %>
     </td>
 </table>
-
-<%= link_to 'このプロジェクトを編集する', edit_project_path(@project), class: 'btn btn-warning' %>
+<div>
+  <%= link_to 'タスクの追加', new_project_task_path(@project, @task), class: 'btn btn-warning' %>
+</div>
+<br>
+<div>
+  <%= render 'tasks/tasks', tasks: @tasks %>
+</div>

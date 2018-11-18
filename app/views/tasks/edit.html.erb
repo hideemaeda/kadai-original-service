@@ -1,2 +1,62 @@
-<h1>Tasks#edit</h1>
-<p>Find me in app/views/tasks/edit.html.erb</p>
+<h1><%= @task.title %> タスク編集ページ</h1>
+
+<div class="container">
+  <%= form_for(@task, url: project_task_path(@project,@task)) do |f| %>
+    <%= render 'layouts/error_messages', model: @task %> 
+    <div class="form-group">
+      <label>タスク名：</label>
+      <%= f.text_area :title, class: 'form-control', rows: 1 %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :priority, '優先度' %>
+      <%= f.select :priority,[["緊急","緊急"],["普通","普通"]], class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <label>締切日：</label>
+      <%= f.text_area :schedule, class: 'col-sx-9', rows: 1  %>(YYYYMMDD)
+    </div>
+    
+    <div class="form-group">
+      <label>進捗：</label>
+      <%= f.text_area :progress, class:  'col-sx-2', rows: 1 %>％
+    </div>
+
+    <div class="form-group">
+      <%= f.label :alarm, 'アラーム' %>
+      <%= f.select :alarm,[["なし","なし"],["あり","あり"]], class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <label>コメント</label>
+      <%= f.text_area :comment, class: 'form-control', rows: 6 %>
+    </div>
+    
+    <div class="form-group">
+      <label>担当者：</label>
+          <% @taskmember_users.each do |taskmember_user| %>
+            <%= taskmember_user.name %>
+          <% end %>
+    </div>
+    <%= f.submit 'タスクを登録する', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+        <p>メンバーを追加する</p>
+          <%= form_for(@taskmember) do |f| %>
+            <%= f.hidden_field :task_id %>
+            <%= f.collection_select :user_id, @users, :id, :name %>
+            <%= f.submit "登録" %>
+          <% end %>
+        <br>
+        <p>メンバーを削除する</p>
+          <%= form_for(@taskmember, url: assign_members_path, html: { method: :delete }) do |f| %>
+            <%= f.hidden_field :task_id %>
+            <%= f.collection_select :user_id, @taskmember_users, :id, :name %>
+            <%= f.submit "削除" %>
+        <% end %>
+        <br>
+
+<div class="container">
+  <%= link_to 'タスクを削除する', project_task_path(@project, @task), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+</div>

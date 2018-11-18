@@ -1,5 +1,5 @@
 <ul class="media-list">
-  <% @as_projects.each do |project| %>
+  <% @projects.each do |project| %>
     <li class="media">
       <div class="media-body">
         <div>
@@ -11,5 +11,5 @@
       </div>
     </li>
   <% end %>
-  <%= paginate @as_projects %>
+  <%= paginate @projects %>
 </ul>

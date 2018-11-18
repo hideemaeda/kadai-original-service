@@ -5,6 +5,11 @@ class Task < ApplicationRecord
   has_many :task_menbers, through: :assign_members, source: :user
   
   validates :title, presence: true, length: {maximum: 10}
+  validates :priority, presence: true
+  validates :schedule, presence: true
+  validates :progress, presence: true
+  validates :alarm, presence: true
+  validates :comment, presence: true
   
   def assign_member(user)
     self.assign_members.find_or_create_by(user_id: user.id)

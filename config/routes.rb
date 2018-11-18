@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :pjmembers, only: [:create, :destroy]
+  resource :pjmembers, only: [:create, :destroy]
+  resource :assign_members, only: [:create, :destroy]
 end

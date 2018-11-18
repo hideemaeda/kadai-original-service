@@ -7,9 +7,17 @@
 <%= form_for(@pjmember) do |f| %>
   <%= f.hidden_field :project_id %>
   <%= f.collection_select :user_id, @users, :id, :name %>
-  <%= f.submit %>
+  <%= f.submit "登録" %>
 <% end %>
-
+<br>
+<p>メンバーを削除する</p>
+<%= form_for(@pjmember, url: pjmembers_path, html: { method: :delete }) do |f| %>
+  <%= f.hidden_field :project_id %>
+  <%= f.collection_select :user_id, @pjmember_users, :id, :name %>
+  <%= f.submit "削除" %>
+<% end %>
+<br>
+<p>参加メンバー</p>
 <% @pjmember_users.each do |pjmember_user| %>
 　<%= pjmember_user.name %>
 <% end %>
@@ -18,4 +26,3 @@
 <br>
 <div class="container">
   <%= link_to 'プロジェクトを削除する', @project, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
-</div>

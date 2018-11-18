@@ -1,5 +1,6 @@
 <div class="container">
-  <%= form_for(@task) do |f| %>
+  <%= form_for(@task, url: project_tasks_path(@project)) do |f| %>
+    <%= render 'layouts/error_messages', model: @task %> 
     <div class="form-group">
       <label>タスク名：</label>
       <%= f.text_area :title, class: 'form-control', rows: 1 %>
@@ -11,13 +12,13 @@
     </div>
     
     <div class="form-group">
-      <label>スケジュール：</label>
-      <%= f.text_area :schedule, class: 'form-control', rows: 1 %>
+      <label>締切日：</label>
+      <%= f.text_area :schedule, class: 'col-sx-9', rows: 1  %>(YYYYMMDD)
     </div>
     
     <div class="form-group">
       <label>進捗：</label>
-      <%= f.text_area :schedule, class: 'form-control', rows: 1 %>
+      <%= f.text_area :progress, class:  'col-sx-2', rows: 1 %>％
     </div>
 
     <div class="form-group">

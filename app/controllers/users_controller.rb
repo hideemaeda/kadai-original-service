@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @as_projects = current_user.assign_projects.order('created_at DESC').page(params[:page])
   end
   
   def edit
@@ -57,6 +58,18 @@ class UsersController < ApplicationController
   def correct_task
     @task = Task.find(params[:id])
     redirect_to root_path if @task.task_menbers.include?(current_user)
+  end
+  
+  def pjmembers
+    @user = User.find(params[:id])
+    @pjmembers = @user.pjmembers.page(params[:page])
+    counts(@user)
+  end
+  
+  def taskmembers
+    @user = User.find(params[:id])
+    @taskmembers = @user.assign_members.page(params[:page])
+    counts(@user)
   end
 
   private

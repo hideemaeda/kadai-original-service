@@ -1,7 +1,15 @@
 <% if logged_in? %>
-  <div class="row">
-    <div class="col-xs-8">
-      <%= render 'projects/projects', projects: @projects %>
+  <div class="col-xs-6">
+    <ul class="nav nav-tabs nav-justified">
+      <li><a href="#">参加プロジェクト</a></li>
+    </ul>
+      <%= render 'projects/projects', projects: @as_projects %>
+  </div>
+  <div class="col-xs-6">
+    <ul class="nav nav-tabs nav-justified">
+      <li><a href="#">作成プロジェクト</a></li>
+    </ul>
+      <%= render 'projects/ownprojects', projects: @projects %>
     </div>
   </div>
 <% else %>
