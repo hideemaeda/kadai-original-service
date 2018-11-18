@@ -9,12 +9,12 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   
   has_many :pjmembers, dependent: :destroy
-  has_many :assign_projects, through: :pjmembers, source: :project
+  has_many :assign_projects, through: :pjmembers, source: :project, dependent: :destroy
   
   has_many :tasks, dependent: :destroy
   
   has_many :assign_members, dependent: :destroy
-  has_many :task_menbers, through: :assign_members, source: :task
+  has_many :task_menbers, through: :assign_members, source: :task, dependent: :destroy
   
   def pjmember(project)
     self.pjmembers.find_or_create_by(project_id: project.id)

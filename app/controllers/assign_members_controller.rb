@@ -9,7 +9,7 @@ class AssignMembersController < ApplicationController
   end
 
   def destroy
-    assign_member = AssignMember.find_by(pjmember_params)
+    assign_member = AssignMember.find_by(assign_member_params)
     assign_member.destroy
     flash[:success] = 'メンバーをプロジェクトから外しました。'
     redirect_back(fallback_location: root_path)

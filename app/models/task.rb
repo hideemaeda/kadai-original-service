@@ -1,8 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :project
   
-  has_many :assign_members
-  has_many :task_menbers, through: :assign_members, source: :user
+  has_many :assign_members, dependent: :destroy
+  has_many :task_menbers, through: :assign_members, source: :user, dependent: :destroy
   
   validates :title, presence: true, length: {maximum: 10}
   validates :priority, presence: true

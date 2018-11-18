@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     
     if @task.save
       flash[:success] = 'タスクが正常に登録されました'
-      redirect_back(fallback_location: root_path)
+      redirect_to @project
     else
       @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
       flash.now[:danger] = 'タスクが登録されませんでした'

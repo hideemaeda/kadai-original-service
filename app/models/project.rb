@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   belongs_to :user
   
   has_many :pjmembers, dependent: :destroy
-  has_many :assign_users, through: :pjmembers, source: :user
+  has_many :assign_users, through: :pjmembers, source: :user, dependent: :destroy
   
   has_many :tasks, dependent: :destroy
   
