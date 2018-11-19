@@ -65,7 +65,6 @@ class ProjectsController < ApplicationController
   end
 
   def correct_user
-    @project = Project.find(params[:id])
-    redirect_to root_path if @project.assign_users.include?(current_user)
+    @project = current_user.projects.find(params[:id])
   end
 end
